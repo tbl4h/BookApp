@@ -1,0 +1,2 @@
+Components: CamelCase.
+Class variables: camelCase. 

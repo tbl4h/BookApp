@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "BookApp"
+    }
+  },
+  "defaultProject": "BookApp",
+  "cli": {
+    "analytics": "5f182901-9342-48e6-89bb-d53f2e065669"
+  }
 }
