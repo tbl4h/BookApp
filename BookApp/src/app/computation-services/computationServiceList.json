@@ -1,0 +1,28 @@
+{
+    "computationServices":{
+        "startingValue":{
+            "name": "startingValue",
+            "parametersList": ""
+        },
+        "expectedValue":{
+            "name": "expectedValue",
+            "parametersList": ""
+        },
+        "wholeBudget":{
+            "name": "wholeBudget",
+            "parametersList": ""
+        },
+        "minProbabilityPerCombination":{
+            "name": "minProbabilityPerCombination",
+            "parametersList": ""
+        },
+        "minProfitPerCombination":{
+            "name": "minProfitPerCombination",
+            "parametersList": ""
+        },
+        "minSuccedDraw":{
+            "name": "minSuccedDraw",
+            "parametersList": ""
+        }
+    }
+}

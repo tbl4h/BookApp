@@ -1,2 +1,5 @@
 Components: CamelCase.
 Class variables: camelCase. 
+Forms:
+Forms Id: CamelCase
+inputs name: camelCase

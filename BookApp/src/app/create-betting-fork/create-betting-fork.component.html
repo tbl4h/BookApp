@@ -1,0 +1,85 @@
+<h1>Create Betting Fork Page</h1>
+<form id="BettingFork">
+    <table id="BettingForkTable">
+        <tr id="TableHeader">
+            <td>
+                <label for="scale" form="BettingFork">Units: </label><input type="radio" id="units" name="scale"
+                    value="units">
+                <label for="percentages" form="BettingFork">Percentages: </label><input type="radio" id="percentages"
+                        name="scale" value="percentages">
+            </td>
+            <td>
+                <label form="BettingFork">Lock Variable</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="startingValue" form="BettingFork">Starting value in units: </label><input type="number" name="startingValue">
+            </td>
+            <td>
+                <input type="checkbox" name="lockStartingValue">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="expectedValue" form="BettingFork">Expected value </label><input type="number" name="expectedValue">
+            </td>
+            <td>
+                <input type="checkbox" name="lockExpectedValue">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="wholeBudget" form="BettingFork">Whole budget for fork: </label><input type="number" name="wholeBudget">
+            </td>
+            <td>
+                <input type="checkbox" name="lockWholeBudget">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label form="BettingFork">Advanced </label>
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                <label for="minProbabilityPerCombination" form="BettingFork">Min probability per combination: </label><input type="number" name="minProbabilityPerCombination">
+            </td>
+            <td>
+                <input type="checkbox" name="lockMinProbabilityPerCombination">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="minProfitPerCombination" form="BettingFork">Min profit per combination: </label><input type="number" name="minProfitPerCombination">
+            </td>
+            <td>
+                <input type="checkbox" name="lockMinProfitPerCombination">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="minSuccedDraw" form="BettingFork">Min succed draw to achive expected value: </label><input type="number" name="minSuccedDraw">
+            </td>
+            <td>
+                <input type="checkbox" name="lockMinSuccedDraw">
+            </td>
+        </tr>        
+    </table>
+</form>
+
+
+
+<!---TO DO -->
+<!--- 
+1) Create Explicit transmission of the form via html - Done
+2) Create Mock json data for all services
+3) Create All services (in ts)  
+4) Correct form in Angular standards to fit for Mock data
+-->
+<!-- Annotation 
+Is single <tr> depend of computation service ?
+Yes                                     No 
+ |                                      |     
+No future templates for Form        templates acceptable
+-->
