@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>
-                <label for="startingValue" form="BettingFork">Starting value in units: </label><input type="number" name="startingValue" >
+                <label for="startingValue" form="BettingFork">Starting value in units: </label><input type="number" [formControl]='startingValue' name="startingValue" >
             </td>
             <td>
                 <input type="checkbox" name="lockStartingValue">
@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <td>
-                <label for="expectedValue" form="BettingFork">Expected value </label><input type="number" name="expectedValue">
+                <label for="expectedValue" form="BettingFork">Expected value </label><input type="number" [formControl]='expectedValue' name="expectedValue">
             </td>
             <td>
                 <input type="checkbox" name="lockExpectedValue">
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td>
-                <label for="wholeBudget" form="BettingFork">Whole budget for fork: </label><input type="number" name="wholeBudget">
+                <label for="wholeBudget" form="BettingFork">Whole budget for fork: </label><input type="number" [formControl]='wholeBudget' name="wholeBudget">
             </td>
             <td>
                 <input type="checkbox" name="lockWholeBudget">
@@ -43,7 +43,7 @@
         </tr>
         <tr>
             <td>
-                <label for="minProbabilityPerCombination" form="BettingFork">Min probability per combination: </label><input type="number" name="minProbabilityPerCombination">
+                <label for="minProbabilityPerCombination" form="BettingFork">Min probability per combination: </label><input type="number" [formControl]='minProbabilityPerCombination' name="minProbabilityPerCombination">
             </td>
             <td>
                 <input type="checkbox" name="lockMinProbabilityPerCombination">
@@ -51,7 +51,7 @@
         </tr>
         <tr>
             <td>
-                <label for="minProfitPerCombination" form="BettingFork">Min profit per combination: </label><input type="number" name="minProfitPerCombination">
+                <label for="minProfitPerCombination" form="BettingFork">Min profit per combination: </label><input type="number" [formControl]='minProfitPerCombination' name="minProfitPerCombination">
             </td>
             <td>
                 <input type="checkbox" name="lockMinProfitPerCombination">
@@ -59,7 +59,7 @@
         </tr>
         <tr>
             <td>
-                <label for="minSuccedDraw" form="BettingFork">Min succed draw to achive expected value: </label><input type="number" name="minSuccedDraw">
+                <label for="minSuccedDraw" form="BettingFork">Min succed draw to achive expected value: </label><input type="number" [formControl]='minSucceedDraw' name="minSuccedDraw">
             </td>
             <td>
                 <input type="checkbox" name="lockMinSuccedDraw">
