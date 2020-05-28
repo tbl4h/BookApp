@@ -1,1 +1,7 @@
-Send Mock fiels to back-end.
+<!---TO DO -->
+<!--- 
+1) Create Explicit transmission of the form via html - Done
+2) Create Mock json data for all services - Done
+3) Create All services (in ts)  
+4) Correct form in Angular standards to fit for Mock data
+-->

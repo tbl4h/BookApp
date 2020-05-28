@@ -2,7 +2,7 @@
     "computationServices":{
         "startingValue":{
             "name": "startingValue",
-            "parametersList": ""
+            "parametersList": "scale isLock"
         },
         "expectedValue":{
             "name": "expectedValue",
@@ -20,7 +20,7 @@
             "name": "minProfitPerCombination",
             "parametersList": ""
         },
-        "minSuccedDraw":{
+        "minSucceedDraw":{
             "name": "minSuccedDraw",
             "parametersList": ""
         }
