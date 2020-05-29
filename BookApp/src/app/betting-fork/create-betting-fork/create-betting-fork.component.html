@@ -1,0 +1,36 @@
+Value: {{ bettingForm.value | json }}
+<br>
+<br>
+<form [formGroup]="bettingForm" (ngSubmit)="onSubmit()">
+    <p>
+        <label for="startingValue">Starting value:
+            <input matInput placeholder="0" id="startingValue" formControlName="startingValue">
+        </label>
+    </p>
+    <p>
+        <label for="expectedValue">Expected value:
+            <input matInput placeholder="0" id="expectedValue" formControlName="expectedValue">
+        </label>
+    </p>
+    <p>
+        <label for="wholeBudget">Whole budget:
+            <input matInput placeholder="0" id="wholeBudget" formControlName="wholeBudget">
+        </label>
+    </p>
+    <p>
+        <label for="minProbabilityPerCombination">Min probability per combination:
+            <input matInput placeholder="0" id="minProbabilityPerCombination" formControlName="minProbabilityPerCombination">
+        </label>
+    </p>
+    <p>
+        <label for="minProfitPerCombination">Min profit per combination:
+            <input matInput placeholder="0" id="minProfitPerCombination" formControlName="minProfitPerCombination">
+        </label>
+    </p>
+    <p>
+        <label for="minSucceedDraw">Min succeed draw:
+            <input matInput placeholder="0" id="minSucceedDraw" formControlName="minSucceedDraw">
+        </label>
+    </p>
+    <button type="submit" [disabled]="!bettingForm.valid">Submit</button>
+</form>

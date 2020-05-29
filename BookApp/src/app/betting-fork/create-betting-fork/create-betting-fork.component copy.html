@@ -1,0 +1,67 @@
+Value: {{ bettingForm.value | json }}
+<br>
+<br>
+<form [formGroup]="bettingForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Starting value</mat-label>
+            <input matInput placeholder="0" formControlName="startingValue">
+            <mat-hint>Starting value for fork in units.</mat-hint>
+            <mat-error *ngIf="startingValue.invalid && startingValue.touched">
+                Wrong Value !
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Expected value</mat-label>
+            <input matInput placeholder="0" formControlName="expectedValue">
+            <mat-hint>Expected value when fork be ended in %.</mat-hint>
+            <mat-error *ngIf="expectedValue.invalid && expectedValue.touched">
+                Wrong Value !
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Whole budget</mat-label>
+            <input matInput placeholder="0" formControlName="wholeBudget">
+            <mat-hint>Whole budget for fork in units.</mat-hint>
+            <mat-error *ngIf="wholeBudget.invalid && wholeBudget.touched">
+                Wrong Value !
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Min probability per combination</mat-label>
+            <input matInput placeholder="0" formControlName="minProbabilityPerCombination">
+            <mat-hint>Min probability per combination in %.</mat-hint>
+            <mat-error *ngIf="minProbabilityPerCombination.invalid && minProbabilityPerCombination.touched">
+                Wrong Value !
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Min profit per combination</mat-label>
+            <input matInput placeholder="0" formControlName="minProfitPerCombination">
+            <mat-hint>Min profit per combination in %.</mat-hint>
+            <mat-error *ngIf="minProfitPerCombination.invalid && minProfitPerCombination.touched">
+                Wrong Value !
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Min succed draw</mat-label>
+            <input matInput placeholder="0" formControlName="minSucceedDraw">
+            <mat-hint>Min succed draw to achive expected value.</mat-hint>
+            <mat-error *ngIf="minSucceedDraw.invalid && minSucceedDraw.touched">
+                Wrong Value !
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <button type="submit" [disabled]="!bettingForm.valid">Submit</button>
+</form>
+

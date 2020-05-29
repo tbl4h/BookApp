@@ -1,21 +1,22 @@
-import { CreateBettingForkComponent } from './create-betting-fork/create-betting-fork.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BettingForkModule } from './betting-fork/betting-fork.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateBettingForkComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
+    BettingForkModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
