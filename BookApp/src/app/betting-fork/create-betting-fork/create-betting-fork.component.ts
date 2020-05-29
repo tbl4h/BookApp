@@ -1,6 +1,9 @@
+import { ExpectedValueService } from './../../computation-services/expected-value.service';
+import { ComputationServicesModule } from './../../computation-services/computation-services.module';
 import { BettingForkData } from '../../Interfaces/bettingFork';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,40 +16,52 @@ export class CreateBettingForkComponent implements OnInit {
   /* Useful in template form type */
   // BettingForkData;
 
+  /* Observables */
+  
   /* Reactive form Data */
-  bettingForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
-
+  constructor(private fb: FormBuilder,
+              private expectedValue: ExpectedValueService) { }
+  bettingForm = this.fb.group({
+    startingValue: [0, [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(100000)
+    ]],
+    expectedValue: [0, [
+      Validators.required,
+    ]],
+    wholeBudget: [0, [
+      Validators.max(1000000),
+    ]],
+    minProbabilityPerCombination: [0, [
+      Validators.min(1),
+      Validators.max(99)
+    ]],
+    minProfitPerCombination: [0, [
+      Validators.min(1),
+      Validators.max(99)
+    ]],
+    minSucceedDraw: [0, [
+      Validators.min(1),
+    ]]
+  });
+  obsStartingValue = this.bettingForm.controls['startingValue'];
+  this.obsStartingValue.this.service.function
+    .subscribe(arg => this.property = arg);
+  
+  obsExpectedValue = this.bettingForm.controls['expectedValue'];
+  obsWholeBudget = this.bettingForm.controls['wholeBudget'];
   ngOnInit() {
-    this.bettingForm = this.fb.group({
-      startingValue: [0, [
-        Validators.required,
-        Validators.min(1),
-        Validators.max(100000)
-      ]],
-      expectedValue: [0, [
-        Validators.required,
-      ]],
-      wholeBudget: [0, [
-        Validators.max(1000000),
-      ]],
-      minProbabilityPerCombination: [0, [
-        Validators.min(1),
-        Validators.max(99)
-      ]],
-      minProfitPerCombination: [0, [
-        Validators.min(1),
-        Validators.max(99)
-      ]],
-      minSucceedDraw: [0, [
-        Validators.min(1),
-      ]]
-      });
-    }
+   
+  }
+  
+  
 
   get startingValue() {
     return this.bettingForm.get('startingValue');
   }
+
+
   get expectedValue() {
     return this.bettingForm.get('expectedValue');
   }
@@ -68,3 +83,4 @@ export class CreateBettingForkComponent implements OnInit {
   }
 
 }
+
