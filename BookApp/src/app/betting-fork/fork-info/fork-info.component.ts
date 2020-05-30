@@ -18,7 +18,6 @@ export class ForkInfoComponent implements OnInit, ForkInfoData {
   /* Implements Fork Info Data */
   expectedValueInUnits: number;
   testVlaue = 100;
-  /* Boilerplate-code */
   /* Observers */
   obsExpectedValueInUnits = {
     next: x => { this.expectedValueInUnits = x; },
