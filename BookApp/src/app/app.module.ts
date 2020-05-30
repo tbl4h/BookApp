@@ -1,3 +1,4 @@
+import { ComputationServiceService } from 'src/app/computation-services/computation-service.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -11,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -18,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BettingForkModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ComputationServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

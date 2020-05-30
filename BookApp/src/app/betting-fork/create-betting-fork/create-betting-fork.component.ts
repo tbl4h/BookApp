@@ -1,5 +1,4 @@
-import { ExpectedValueService } from './../../computation-services/expected-value.service';
-import { ComputationServicesModule } from './../../computation-services/computation-services.module';
+import { ComputationServiceService } from './../../computation-services/computation-service.service';
 import { BettingForkData } from '../../Interfaces/bettingFork';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,14 +12,10 @@ import { Observable } from 'rxjs';
 })
 export class CreateBettingForkComponent implements OnInit {
 
-  /* Useful in template form type */
-  // BettingForkData;
-
-  /* Observables */
-  
-  /* Reactive form Data */
   constructor(private fb: FormBuilder,
-              private expectedValue: ExpectedValueService) { }
+              private computationService: ComputationServiceService) { }
+
+  /* Reactive form Data */
   bettingForm = this.fb.group({
     startingValue: [0, [
       Validators.required,
@@ -45,22 +40,33 @@ export class CreateBettingForkComponent implements OnInit {
       Validators.min(1),
     ]]
   });
-  obsStartingValue = this.bettingForm.controls['startingValue'];
-  this.obsStartingValue.this.service.function
-    .subscribe(arg => this.property = arg);
-  
-  obsExpectedValue = this.bettingForm.controls['expectedValue'];
-  obsWholeBudget = this.bettingForm.controls['wholeBudget'];
+
+  /* Observables */
+  objStartingValue = this.bettingForm.controls['startingValue'];
+  objExpectedValue = this.bettingForm.controls['expectedValue'];
+  objWholeBudget = this.bettingForm.controls['wholeBudget'];
+
+  /* Create Observables */
+  obsStartingValue = new Observable((observer) => {
+    observer.next(this.objStartingValue.value); // number
+  });
+  obsExpectedValue = new Observable((observer) => {
+    observer.next(this.objStartingValue.value); // number
+  });
+  obsWholeBudget = new Observable((observer) => {
+    observer.next(this.objStartingValue.value); // number
+  });
+  /* Subscriptions */
+
   ngOnInit() {
-   
+    this.obsStartingValue.subscribe(this.computationService.obsStartingValue);
+    this.obsExpectedValue.subscribe(this.computationService.obsStartingValue);
+    this.obsWholeBudget.subscribe(this.computationService.obsStartingValue);
   }
-  
-  
 
   get startingValue() {
     return this.bettingForm.get('startingValue');
   }
-
 
   get expectedValue() {
     return this.bettingForm.get('expectedValue');
@@ -77,9 +83,10 @@ export class CreateBettingForkComponent implements OnInit {
   get minSucceedDraw() {
     return this.bettingForm.get('minSuccedDraw');
   }
+
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.warn(this.bettingForm.value);
+    // console.warn(this.bettingForm.value);
   }
 
 }

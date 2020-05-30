@@ -1,8 +1,6 @@
-import { StartingValueService } from './../computation-services/starting-value.service';
-import { ExpectedValueService } from './../computation-services/expected-value.service';
-import { ComputationServicesModule } from './../computation-services/computation-services.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -26,12 +24,10 @@ import { ForkInfoComponent } from './fork-info/fork-info.component';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-    StartingValueService,
-    ExpectedValueService,
-
   ],
   exports: [
-    CreateBettingForkComponent
+    CreateBettingForkComponent,
+    ForkInfoComponent
   ]
 })
 export class BettingForkModule { }
