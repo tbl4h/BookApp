@@ -19,15 +19,12 @@ export class ForkInfoComponent implements OnInit, ForkInfoData {
   expectedValueInUnits: number;
   testVlaue = 100;
   /* Observers */
-  obsExpectedValueInUnits = {
-    next: x => { this.expectedValueInUnits = x; },
-    error: err => console.error('Observer got an error: ' + err),
-    complete: () => console.log('Observer got a complete notification'),
-  };
+
   /* Subscribe Subject */ 
   
-
+  
   ngOnInit() {
+    console.log('expectedValueInUnits ' + this.expectedValueInUnits);
     this.computationService.subjExpectedValueInUnits.next(this.expectedValueInUnits);
   }
 

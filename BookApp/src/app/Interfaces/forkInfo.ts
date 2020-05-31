@@ -1,3 +1,3 @@
 export interface ForkInfoData  {
-    ExpectedValueInUnits: number;
+    expectedValueInUnits: number;
 }

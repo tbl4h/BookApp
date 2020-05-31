@@ -48,7 +48,13 @@ export class CreateBettingForkComponent implements OnInit {
 
   /* Create Observables */
   obsStartingValue = new Observable((observer) => {
-    observer.next(this.objStartingValue.value); // number
+    observer.next(this.objStartingValue.value);
+    console.log('Starting Value emmit new value ' + this.objStartingValue.value);
+    return {
+      unsubscribe() {
+        console.log('Stop observe Starting Value');
+      }
+    };
   });
   obsExpectedValue = new Observable((observer) => {
     observer.next(this.objStartingValue.value); // number
@@ -56,12 +62,11 @@ export class CreateBettingForkComponent implements OnInit {
   obsWholeBudget = new Observable((observer) => {
     observer.next(this.objStartingValue.value); // number
   });
+  
   /* Subscriptions */
 
   ngOnInit() {
-    this.obsStartingValue.subscribe(this.computationService.obsStartingValue);
-    this.obsExpectedValue.subscribe(this.computationService.obsStartingValue);
-    this.obsWholeBudget.subscribe(this.computationService.obsStartingValue);
+
   }
 
   get startingValue() {
@@ -85,9 +90,49 @@ export class CreateBettingForkComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    // console.warn(this.bettingForm.value);
+    this.obsStartingValue.subscribe(this.computationService.obsStartingValue);
+    this.obsExpectedValue.subscribe(this.computationService.obsExpectedValue);
+    this.obsWholeBudget.subscribe(this.computationService.obsWholeBudget);
   }
 
 }
+/*
+// Create an Observable that will start listening to geolocation updates
+// when a consumer subscribes.
+const locations = new Observable((observer) => {
+  let watchId: number;
 
+  // Simple geolocation API check provides values to publish
+  if ('geolocation' in navigator) {
+    watchId = navigator.geolocation.watchPosition((position: Position) => {
+      observer.next(position);
+    }, (error: PositionError) => {
+      observer.error(error);
+    });
+  } else {
+    observer.error('Geolocation not available');
+  }
+
+  // When the consumer unsubscribes, clean up data ready for next subscription.
+  return {
+    unsubscribe() {
+      navigator.geolocation.clearWatch(watchId);
+    }
+  };
+});
+
+// Call subscribe() to start listening for updates.
+const locationsSubscription = locations.subscribe({
+  next(position) {
+    console.log('Current Position: ', position);
+  },
+  error(msg) {
+    console.log('Error Getting Location: ', msg);
+  }
+});
+
+// Stop listening for location after 10 seconds
+setTimeout(() => {
+  locationsSubscription.unsubscribe();
+}, 10000);
+*/
