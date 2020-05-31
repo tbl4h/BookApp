@@ -66,6 +66,17 @@ export class ComputationServiceService implements BettingForkData {
   set MinSuccedDraw(value: number) {
     this.minSuccedDraw = value;
   }
+  get getStartingValue(): number{
+    return this.startingValue;
+  }
+  // tslint:disable-next-line: adjacent-overload-signatures
+  get getExpectedValue(): number{
+    return this.expectedValue;
+  }
+  get getWholeBudget(): number{
+    return this.wholeBudget;
+  }
+  /* Private Methods */
   private ExpectedValueInUnits() {
     this.expectedValueInUnits = (this.startingValue * this.expectedValue) / 100;
   }
@@ -73,6 +84,7 @@ export class ComputationServiceService implements BettingForkData {
     /* Subscribe Subject*/
     this.subjExpectedValueInUnits.subscribe({
       next: (x) => {
+        this.ExpectedValueInUnits();
         x = this.expectedValueInUnits;
         console.log('Subscribe subject in value of: ' + x);
       },

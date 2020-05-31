@@ -7,7 +7,7 @@ import { Observable, Observer } from 'rxjs';
   templateUrl: './fork-info.component.html',
   styleUrls: ['./fork-info.component.css']
 })
-export class ForkInfoComponent implements OnInit, ForkInfoData {
+export class ForkInfoComponent implements OnInit {
 
   constructor(private computationService: ComputationServiceService
   ) { }
@@ -24,8 +24,8 @@ export class ForkInfoComponent implements OnInit, ForkInfoData {
   
   
   ngOnInit() {
+    this.computationService.subjExpectedValueInUnits.next(this.ExpectedValueInUnits);
     console.log('expectedValueInUnits ' + this.expectedValueInUnits);
-    this.computationService.subjExpectedValueInUnits.next(this.expectedValueInUnits);
   }
 
 }

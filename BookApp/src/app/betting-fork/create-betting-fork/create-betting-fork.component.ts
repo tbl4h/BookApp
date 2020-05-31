@@ -1,8 +1,8 @@
 import { ComputationServiceService } from './../../computation-services/computation-service.service';
 import { BettingForkData } from '../../Interfaces/bettingFork';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, fromEvent } from 'rxjs';
 
 
 @Component({
@@ -10,10 +10,14 @@ import { Observable } from 'rxjs';
   templateUrl: './create-betting-fork.component.html',
   styleUrls: ['./create-betting-fork.component.css']
 })
-export class CreateBettingForkComponent implements OnInit {
+export class CreateBettingForkComponent implements OnInit, OnDestroy {
+  /*Class properties */
+  mySubscription: any;
 
   constructor(private fb: FormBuilder,
-              private computationService: ComputationServiceService) { }
+              private computationService: ComputationServiceService,
+              ){
+              }
 
   /* Reactive form Data */
   bettingForm = this.fb.group({
@@ -42,20 +46,24 @@ export class CreateBettingForkComponent implements OnInit {
   });
 
   /* Observables */
-  objStartingValue = this.bettingForm.controls['startingValue'];
+  objStartingValue = this.bettingForm.get('startingValue');
   objExpectedValue = this.bettingForm.controls['expectedValue'];
   objWholeBudget = this.bettingForm.controls['wholeBudget'];
+  /* From Event Observables */
+  // obsFromEventStartingValue = fromEvent(this.objStartingValue.valueChanges, 'onkeypress');
 
   /* Create Observables */
+  /*
   obsStartingValue = new Observable((observer) => {
-    observer.next(this.objStartingValue.value);
-    console.log('Starting Value emmit new value ' + this.objStartingValue.value);
+    observer.next(this.objStartingValue.valueChanges);
+    console.log('Starting Value emmit new value ' + this.objStartingValue.valueChanges);
     return {
       unsubscribe() {
         console.log('Stop observe Starting Value');
       }
     };
   });
+  */
   obsExpectedValue = new Observable((observer) => {
     observer.next(this.objStartingValue.value); // number
   });
@@ -66,7 +74,11 @@ export class CreateBettingForkComponent implements OnInit {
   /* Subscriptions */
 
   ngOnInit() {
-
+    this.objStartingValue.valueChanges.subscribe(this.computationService.obsStartingValue);
+    this.objExpectedValue.valueChanges.subscribe(this.computationService.obsExpectedValue);
+    this.objWholeBudget.valueChanges.subscribe(this.computationService.obsWholeBudget);
+    // console.log('Type of objStartingValue: ' + typeof(this.objStartingValue));
+    // console.log('Type of objExpectedValue: ' + typeof(this.objExpectedValue));
   }
 
   get startingValue() {
@@ -90,49 +102,18 @@ export class CreateBettingForkComponent implements OnInit {
   }
 
   onSubmit() {
-    this.obsStartingValue.subscribe(this.computationService.obsStartingValue);
-    this.obsExpectedValue.subscribe(this.computationService.obsExpectedValue);
-    this.obsWholeBudget.subscribe(this.computationService.obsWholeBudget);
+    
+    // this.obsExpectedValue.subscribe(this.computationService.obsExpectedValue);
+    // this.obsWholeBudget.subscribe(this.computationService.obsWholeBudget);
+    // tslint:disable-next-line: no-unused-expression
+    console.log('Comp StartValu ' + this.computationService.getStartingValue);
+    console.log('Comp ExpVal ' + this.computationService.getExpectedValue);
+    console.log(this.computationService.getWholeBudget);
   }
 
-}
-/*
-// Create an Observable that will start listening to geolocation updates
-// when a consumer subscribes.
-const locations = new Observable((observer) => {
-  let watchId: number;
-
-  // Simple geolocation API check provides values to publish
-  if ('geolocation' in navigator) {
-    watchId = navigator.geolocation.watchPosition((position: Position) => {
-      observer.next(position);
-    }, (error: PositionError) => {
-      observer.error(error);
-    });
-  } else {
-    observer.error('Geolocation not available');
-  }
-
-  // When the consumer unsubscribes, clean up data ready for next subscription.
-  return {
-    unsubscribe() {
-      navigator.geolocation.clearWatch(watchId);
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
     }
-  };
-});
-
-// Call subscribe() to start listening for updates.
-const locationsSubscription = locations.subscribe({
-  next(position) {
-    console.log('Current Position: ', position);
-  },
-  error(msg) {
-    console.log('Error Getting Location: ', msg);
   }
-});
-
-// Stop listening for location after 10 seconds
-setTimeout(() => {
-  locationsSubscription.unsubscribe();
-}, 10000);
-*/
+}

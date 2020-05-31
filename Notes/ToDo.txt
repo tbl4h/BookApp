@@ -4,5 +4,7 @@
 2) Create Mock json data for all services - Done
 3) Create All services (in ts)  - Done
 4) Correct form to Angular in Reactive form standards - In proggres
-
+   -- Bug: Angular mat-form-field does not display correctly.
+5) Create communication beetwen components and service:
+   -- Create asynchrenous/live communication - In Progress
 -->
