@@ -1,6 +1,6 @@
 import { ComputationServiceService } from './../../computation-services/computation-service.service';
 import { BettingForkData } from '../../Interfaces/bettingFork';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, fromEvent } from 'rxjs';
 
@@ -10,9 +10,7 @@ import { Observable, fromEvent } from 'rxjs';
   templateUrl: './create-betting-fork.component.html',
   styleUrls: ['./create-betting-fork.component.css']
 })
-export class CreateBettingForkComponent implements OnInit, OnDestroy {
-  /*Class properties */
-  mySubscription: any;
+export class CreateBettingForkComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(private fb: FormBuilder,
               private computationService: ComputationServiceService,
@@ -47,40 +45,28 @@ export class CreateBettingForkComponent implements OnInit, OnDestroy {
 
   /* Observables */
   objStartingValue = this.bettingForm.get('startingValue');
-  objExpectedValue = this.bettingForm.controls['expectedValue'];
-  objWholeBudget = this.bettingForm.controls['wholeBudget'];
-  /* From Event Observables */
-  // obsFromEventStartingValue = fromEvent(this.objStartingValue.valueChanges, 'onkeypress');
-
-  /* Create Observables */
-  /*
-  obsStartingValue = new Observable((observer) => {
-    observer.next(this.objStartingValue.valueChanges);
-    console.log('Starting Value emmit new value ' + this.objStartingValue.valueChanges);
-    return {
-      unsubscribe() {
-        console.log('Stop observe Starting Value');
-      }
-    };
-  });
-  */
-  obsExpectedValue = new Observable((observer) => {
-    observer.next(this.objStartingValue.value); // number
-  });
-  obsWholeBudget = new Observable((observer) => {
-    observer.next(this.objStartingValue.value); // number
-  });
-  
-  /* Subscriptions */
+  objExpectedValue = this.bettingForm.get('expectedValue');
+  objWholeBudget = this.bettingForm.get('wholeBudget');
 
   ngOnInit() {
+    /* Subscriptions when component init */
     this.objStartingValue.valueChanges.subscribe(this.computationService.obsStartingValue);
     this.objExpectedValue.valueChanges.subscribe(this.computationService.obsExpectedValue);
     this.objWholeBudget.valueChanges.subscribe(this.computationService.obsWholeBudget);
-    // console.log('Type of objStartingValue: ' + typeof(this.objStartingValue));
-    // console.log('Type of objExpectedValue: ' + typeof(this.objExpectedValue));
   }
-
+  ngOnChanges(){
+    /* Subscription when No focus on inputs */
+    if (this.objStartingValue.untouched === true){
+      this.objStartingValue.value.subscribe(this.computationService.sendToDbStartingValue);
+    }
+    if (this.objExpectedValue.untouched === true){
+      this.objExpectedValue.value.subscribe(this.computationService.sendToDbExpectedValue);
+    }
+    if (this.objWholeBudget.untouched === true){
+      this.objWholeBudget.value.subscribe(this.computationService.sendToDbWholeBudget);
+    }
+  }
+  //#region "Getter and Setters"
   get startingValue() {
     return this.bettingForm.get('startingValue');
   }
@@ -100,20 +86,15 @@ export class CreateBettingForkComponent implements OnInit, OnDestroy {
   get minSucceedDraw() {
     return this.bettingForm.get('minSuccedDraw');
   }
-
+  //#endregion "Getter and Setters"
   onSubmit() {
-    
-    // this.obsExpectedValue.subscribe(this.computationService.obsExpectedValue);
-    // this.obsWholeBudget.subscribe(this.computationService.obsWholeBudget);
-    // tslint:disable-next-line: no-unused-expression
+    /* To Do */
+    // Add all data to Forks List
     console.log('Comp StartValu ' + this.computationService.getStartingValue);
     console.log('Comp ExpVal ' + this.computationService.getExpectedValue);
-    console.log(this.computationService.getWholeBudget);
   }
 
   ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
+    console.log('Cia create betting form ;)');
   }
 }
